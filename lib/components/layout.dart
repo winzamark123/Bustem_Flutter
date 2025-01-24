@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import '../pages/home/home_page.dart';
 
 class MainLayout extends StatefulWidget {
-  final Widget child;
-  const MainLayout({super.key, required this.child});
+  const MainLayout({super.key});
 
   @override
   State<MainLayout> createState() => _MainLayoutState();
@@ -12,7 +12,7 @@ class _MainLayoutState extends State<MainLayout> {
   int _selectedIndex = 0;
 
   static const List<Widget> _pages = <Widget>[
-    Center(child: Text('How It Works Page')),
+    HomePage(),
     Center(child: Text('Features Page')),
     Center(child: Text('FAQs Page')),
     Center(child: Text('Login Page')),
@@ -27,34 +27,49 @@ class _MainLayoutState extends State<MainLayout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Bustem'),
-      ),
-      body: _pages[_selectedIndex],
-      bottomNavigationBar: NavigationBar(
-        onDestinationSelected: _onItemTapped,
-        selectedIndex: _selectedIndex,
-        destinations: const <NavigationDestination>[
-          NavigationDestination(
-            icon: Icon(Icons.info_outline),
-            selectedIcon: Icon(Icons.info),
-            label: 'How it Works',
+      body: Column(
+        children: <Widget>[
+          Container(
+            height: 80, // Adjust this value to change navbar height
+            padding:
+                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey.shade300),
+              borderRadius: BorderRadius.circular(12.0),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12.0),
+              child: NavigationBar(
+                height: 65, // Adjust this value for the actual navbar height
+                onDestinationSelected: _onItemTapped,
+                selectedIndex: _selectedIndex,
+                destinations: const <NavigationDestination>[
+                  NavigationDestination(
+                    icon: Icon(Icons.home_outlined),
+                    selectedIcon: Icon(Icons.home),
+                    label: 'Home',
+                  ),
+                  NavigationDestination(
+                    icon: Icon(Icons.star_outline),
+                    selectedIcon: Icon(Icons.star),
+                    label: 'Features',
+                  ),
+                  NavigationDestination(
+                    icon: Icon(Icons.question_answer_outlined),
+                    selectedIcon: Icon(Icons.question_answer),
+                    label: 'FAQs',
+                  ),
+                  NavigationDestination(
+                    icon: Icon(Icons.login_outlined),
+                    selectedIcon: Icon(Icons.login),
+                    label: 'Login',
+                  ),
+                ],
+              ),
+            ),
           ),
-          NavigationDestination(
-            icon: Icon(Icons.star_outline),
-            selectedIcon: Icon(Icons.star),
-            label: 'Features',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.question_answer_outlined),
-            selectedIcon: Icon(Icons.question_answer),
-            label: 'FAQs',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.login_outlined),
-            selectedIcon: Icon(Icons.login),
-            label: 'Login',
+          Expanded(
+            child: _pages[_selectedIndex],
           ),
         ],
       ),
