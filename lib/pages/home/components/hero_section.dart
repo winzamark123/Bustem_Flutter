@@ -6,13 +6,23 @@ class HeroSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.all(24.0),
-      child: Column(
-        children: <Widget>[
-          HeroStats(),
-          HeroTitle(),
-        ],
+    return Center(
+      child: Container(
+        // decoration: BoxDecoration(
+        //   border: Border.all(),
+        // ),
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 1200),
+          child: const Padding(
+            padding: EdgeInsets.all(24.0),
+            child: Column(
+              children: <Widget>[
+                HeroStats(),
+                HeroTitle(),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -62,14 +72,25 @@ class HeroTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 24.0),
-      child: Text(
-        'Identify And Bust Copycats With One Click',
-        style: TextStyle(
-          fontSize:
-              MediaQuery.of(context).size.width * 0.07, // Responsive font size
-          fontWeight: FontWeight.bold,
-        ),
-        softWrap: true,
+      child: Column(
+        children: <Widget>[
+          Text(
+            'Identify And Bust Copycats',
+            style: TextStyle(
+              fontSize: MediaQuery.of(context).size.width *
+                  0.03, // Responsive font size
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            'With One Click',
+            style: TextStyle(
+              fontSize: MediaQuery.of(context).size.width *
+                  0.03, // Responsive font size
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
       ),
     );
   }

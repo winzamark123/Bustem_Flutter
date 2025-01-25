@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shadcn_ui/shadcn_ui.dart';
 
 class HeroFeatures extends StatelessWidget {
   const HeroFeatures({super.key});
@@ -59,7 +58,7 @@ class FeatureCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Row(
       children: <Widget>[
         Container(
           padding: const EdgeInsets.all(6),
@@ -67,21 +66,30 @@ class FeatureCard extends StatelessWidget {
             color: const Color(0xFFE6EAF5),
             shape: BoxShape.circle,
           ),
-          child: Icon(feature.icon),
-        ),
-        Text(
-          feature.title,
-          style: const TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.bold,
+          child: Icon(
+            feature.icon,
+            size: MediaQuery.of(context).size.width * 0.015,
           ),
         ),
-        Text(
-          feature.subtitle,
-          style: const TextStyle(
-            fontSize: 10,
-            color: Colors.grey,
-          ),
+        const SizedBox(width: 8),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              feature.title,
+              style: TextStyle(
+                fontSize: MediaQuery.of(context).size.width * 0.008,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(
+              feature.subtitle,
+              style: TextStyle(
+                fontSize: MediaQuery.of(context).size.width * 0.006,
+                color: Colors.grey,
+              ),
+            ),
+          ],
         ),
       ],
     );

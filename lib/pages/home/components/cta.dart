@@ -7,12 +7,17 @@ class Cta extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
+      child: Row(
         children: <Widget>[
-          CtaTextbox(),
-          CtaButton(),
+          Expanded(
+            flex: 75,
+            child: CtaTextbox(),
+          ),
+          Expanded(
+            flex: 25,
+            child: CtaButton(),
+          ),
         ],
       ),
     );
@@ -25,14 +30,31 @@ class CtaButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return const ShadButton(
       width: double.infinity,
-      backgroundColor: const Color(0xFF1B2452),
-      height: 40,
-      padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
+      backgroundColor: Color(0xFF1B2452),
+      height: 60,
+      padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Icon(Icons.qr_code_scanner, color: Colors.white),
-          Text('Start Scan', style: TextStyle(color: Colors.white)),
-          Text('- it\'s free', style: TextStyle(color: Colors.grey)),
+          Icon(Icons.qr_code_scanner, color: Colors.white, size: 20),
+          SizedBox(width: 4),
+          Flexible(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  'Start Scan',
+                  style: TextStyle(color: Colors.white, fontSize: 14),
+                ),
+                Text(
+                  "it's free",
+                  style: TextStyle(color: Colors.grey, fontSize: 12),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -58,8 +80,7 @@ class _CtaTextboxState extends State<CtaTextbox> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 40,
-      width: double.infinity,
+      height: 80,
       child: ShadInput(
         controller: _controller,
         placeholder: const Row(
