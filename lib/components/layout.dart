@@ -11,18 +11,18 @@ class MainLayout extends StatefulWidget {
 
 class _MainLayoutState extends State<MainLayout> {
   int _selectedIndex = 0;
+  final ScrollController _scrollController = ScrollController();
+  final Map<String, GlobalKey> _sectionKeys = <String, GlobalKey>{
+    'home': GlobalKey(),
+    'features': GlobalKey(),
+    'faqs': GlobalKey(),
+    'login': GlobalKey(),
+  };
 
-  static const List<Widget> _pages = <Widget>[
-    HomePage(),
-    Center(child: Text('Features Page')),
-    Center(child: Text('FAQs Page')),
-    Center(child: Text('Login Page')),
-  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   @override
@@ -32,10 +32,15 @@ class _MainLayoutState extends State<MainLayout> {
         children: <Widget>[
           CustomNavBar(
             selectedIndex: _selectedIndex,
-            onItemTapped: _onItemTapped,
+            onItemTapped: (int index) => setState(() => _selectedIndex = index),
+            sectionKeys: _sectionKeys,
+            scrollController: _scrollController,
           ),
           Expanded(
-            child: _pages[_selectedIndex],
+            child: HomePage(
+              scrollController: _scrollController,
+              sectionKeys: _sectionKeys,
+            ),
           ),
         ],
       ),

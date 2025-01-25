@@ -1,16 +1,51 @@
 import 'package:flutter/material.dart';
 
-const List<String> navItems = <String>['Home', 'Features', 'FAQs', 'Login'];
+class NavItem {
+  final String label;
+  final String sectionKey;
+
+  const NavItem({required this.label, required this.sectionKey});
+}
+
+const List<NavItem> navItems = <NavItem>[
+  NavItem(label: 'Home', sectionKey: 'home'),
+  NavItem(label: 'Features', sectionKey: 'features'),
+  NavItem(label: 'FAQs', sectionKey: 'faqs'),
+  NavItem(label: 'Login', sectionKey: 'login'),
+];
 
 class CustomNavBar extends StatelessWidget {
   final int selectedIndex;
   final void Function(int) onItemTapped;
+  final Map<String, GlobalKey> sectionKeys;
+  final ScrollController scrollController;
 
   const CustomNavBar({
     super.key,
     required this.selectedIndex,
     required this.onItemTapped,
+    required this.sectionKeys,
+    required this.scrollController,
   });
+
+  void scrollToSection(String sectionKey, int index) {
+    final GlobalKey? key = sectionKeys[sectionKey];
+    if (key?.currentContext != null) {
+      final RenderBox box =
+          key!.currentContext!.findRenderObject() as RenderBox;
+      final double position = box.localToGlobal(Offset.zero).dy;
+
+      // Subtract the navbar height to account for the fixed position
+      final double offset = position - 80;
+
+      scrollController.animateTo(
+        offset,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
+    }
+    onItemTapped(index);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,10 +82,15 @@ class CustomNavBar extends StatelessWidget {
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: navItems
-                      .map((String item) => _NavItem(
-                            label: item,
-                            isSelected: selectedIndex == navItems.indexOf(item),
-                            onTap: () => onItemTapped(navItems.indexOf(item)),
+                      .asMap()
+                      .entries
+                      .map<Widget>((MapEntry<int, NavItem> entry) => _NavItem(
+                            label: entry.value.label,
+                            isSelected: selectedIndex == entry.key,
+                            onTap: () => scrollToSection(
+                              entry.value.sectionKey,
+                              entry.key,
+                            ),
                           ))
                       .toList(),
                 ),
