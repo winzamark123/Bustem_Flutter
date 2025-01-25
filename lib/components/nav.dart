@@ -1,3 +1,4 @@
+import 'package:bustem_flutter/utils/responsive.dart';
 import 'package:flutter/material.dart';
 
 class NavItem {
@@ -49,7 +50,7 @@ class CustomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isSmallScreen = MediaQuery.of(context).size.width < 800;
+    final bool isSmallScreen = Responsive.isSmallScreen(context);
 
     return Container(
       height: 80,

@@ -1,3 +1,4 @@
+import 'package:bustem_flutter/utils/responsive.dart';
 import 'package:flutter/material.dart';
 
 class Footer extends StatelessWidget {
@@ -31,10 +32,7 @@ class FooterNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-    final isSmallScreen = width < 800;
-
-    return isSmallScreen
+    return Responsive.isSmallScreen(context)
         ? const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[

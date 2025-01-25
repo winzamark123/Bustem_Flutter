@@ -1,3 +1,4 @@
+import 'package:bustem_flutter/utils/responsive.dart';
 import 'package:flutter/material.dart';
 
 class Features extends StatelessWidget {
@@ -5,7 +6,7 @@ class Features extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isSmallScreen = MediaQuery.of(context).size.width < 800;
+    final bool isSmallScreen = Responsive.isSmallScreen(context);
 
     return Column(
       children: <Widget>[
@@ -108,8 +109,8 @@ class FeatureText extends StatelessWidget {
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                  overflow: TextOverflow.fade,
                 ),
               ),
             ],
@@ -122,8 +123,8 @@ class FeatureText extends StatelessWidget {
                 fontSize: 14,
                 color: Colors.grey[600],
               ),
-              overflow: TextOverflow.ellipsis,
-              maxLines: 3,
+              overflow: TextOverflow.fade,
+              maxLines: 2,
             ),
           ),
         ],
