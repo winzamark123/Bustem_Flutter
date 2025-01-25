@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'components/carousel.dart';
-import 'components/cta.dart';
-import 'components/hero_features.dart';
-import 'components/hero_section.dart';
-
+import 'components/carousel/carousel.dart';
+import 'components/features/features.dart';
+import 'components/hero/cta.dart';
+import 'components/hero/hero_features.dart';
+import 'components/hero/hero_section.dart';
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -16,10 +16,10 @@ class HomePage extends StatelessWidget {
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 1000),
               child: Container(
-                decoration: BoxDecoration(
-                  border: Border.all(),
-                  borderRadius: BorderRadius.circular(12.0),
-                ),
+                // decoration: BoxDecoration(
+                //   border: Border.all(),
+                //   borderRadius: BorderRadius.circular(12.0),
+                // ),
                 child: const Padding(
                   padding: EdgeInsets.all(24.0),
                   child: Column(
@@ -33,7 +33,16 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
+          const SizedBox(height: 48),
           const Carousel(),
+          const SizedBox(height: 48),
+
+          Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 1000),
+              child: const Features(),
+            ),
+          ),
         ],
       ),
     );
