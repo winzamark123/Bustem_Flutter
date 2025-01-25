@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'components/carousel/carousel.dart';
 import 'components/faq/faq.dart';
 import 'components/features/features.dart';
+import 'components/footer.dart';
 import 'components/hero/cta.dart';
 import 'components/hero/hero_features.dart';
 import 'components/hero/hero_section.dart';
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -37,7 +39,6 @@ class HomePage extends StatelessWidget {
           const SizedBox(height: 48),
           const Carousel(),
           const SizedBox(height: 48),
-
           Center(
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 1000),
@@ -51,6 +52,7 @@ class HomePage extends StatelessWidget {
               child: const Faq(),
             ),
           ),
+          const Footer(),
         ],
       ),
     );
