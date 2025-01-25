@@ -23,14 +23,34 @@ class HeroFeatures extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double width = MediaQuery.of(context).size.width;
+
     return Padding(
       padding: const EdgeInsets.only(top: 24.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          for (FeatureItem feature in features) FeatureCard(feature: feature),
-        ],
+      child: SizedBox(
+        width: width * 0.8, // Container will take 80% of screen width
+        child: width < 600
+            ? Column(
+                children: <Widget>[
+                  for (FeatureItem feature in features)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 24.0),
+                      child: FeatureCard(feature: feature),
+                    ),
+                ],
+              )
+            : Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  for (FeatureItem feature in features)
+                    SizedBox(
+                      width:
+                          width * 0.25, // Each card takes ~25% of screen width
+                      child: FeatureCard(feature: feature),
+                    ),
+                ],
+              ),
       ),
     );
   }
@@ -58,40 +78,44 @@ class FeatureCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        Container(
-          padding: const EdgeInsets.all(6),
-          decoration: const BoxDecoration(
-            color: const Color(0xFFE6EAF5),
-            shape: BoxShape.circle,
-          ),
-          child: Icon(
-            feature.icon,
-            size: MediaQuery.of(context).size.width * 0.015,
-          ),
-        ),
-        const SizedBox(width: 8),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              feature.title,
-              style: TextStyle(
-                fontSize: MediaQuery.of(context).size.width * 0.008,
-                fontWeight: FontWeight.bold,
-              ),
+    return SizedBox(
+      child: Row(
+        children: <Widget>[
+          Container(
+            padding: const EdgeInsets.all(6),
+            decoration: const BoxDecoration(
+              color: Color(0xFFE6EAF5),
+              shape: BoxShape.circle,
             ),
-            Text(
-              feature.subtitle,
-              style: TextStyle(
-                fontSize: MediaQuery.of(context).size.width * 0.006,
-                color: Colors.grey,
-              ),
+            child: Icon(
+              feature.icon,
+              size: 24,
             ),
-          ],
-        ),
-      ],
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  feature.title,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  feature.subtitle,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    color: Colors.grey,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

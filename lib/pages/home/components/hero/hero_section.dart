@@ -36,27 +36,31 @@ class HeroStats extends StatelessWidget {
     return const ShadBadge.outline(
       backgroundColor: const Color(0xFFE6EAF5),
       hoverBackgroundColor: const Color(0xFFE6EAF5),
-      child: IntrinsicWidth(
-        child: Row(
+      child: SizedBox(
+        width: 400,
+        child: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            ShadAvatar(
+            const ShadAvatar(
               'https://app.requestly.io/delay/2000/avatars.githubusercontent.com/u/124599?v=4',
               placeholder: Text('CN'),
             ),
-            ShadAvatar(
+            const ShadAvatar(
               'https://app.requestly.io/delay/2000/avatars.githubusercontent.com/u/124599?v=4',
               placeholder: Text('CN'),
             ),
-            ShadAvatar(
+            const ShadAvatar(
               'https://app.requestly.io/delay/2000/avatars.githubusercontent.com/u/124599?v=4',
               placeholder: Text('CN'),
             ),
             const SizedBox(width: 8.0),
-            Text(
-              'Trusted by 8k+ ecommerce founders',
-              style: TextStyle(color: const Color(0xFF566CAD)),
+            Flexible(
+              child: Text(
+                'Trusted by 8k+ ecommerce founders',
+                style: const TextStyle(color: Color(0xFF566CAD)),
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
           ],
         ),
@@ -70,25 +74,27 @@ class HeroTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return const Padding(
       padding: const EdgeInsets.only(top: 24.0),
       child: Column(
         children: <Widget>[
           Text(
             'Identify And Bust Copycats',
-            style: TextStyle(
-              fontSize: MediaQuery.of(context).size.width *
-                  0.03, // Responsive font size
+            style: const TextStyle(
+              fontSize: 42,
               fontWeight: FontWeight.bold,
             ),
+            textAlign: TextAlign.center,
+            softWrap: true,
           ),
           Text(
             'With One Click',
-            style: TextStyle(
-              fontSize: MediaQuery.of(context).size.width *
-                  0.03, // Responsive font size
+            style: const TextStyle(
+              fontSize: 32,
               fontWeight: FontWeight.bold,
             ),
+            textAlign: TextAlign.center,
+            softWrap: true,
           ),
         ],
       ),

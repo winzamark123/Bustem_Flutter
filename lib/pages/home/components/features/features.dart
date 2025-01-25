@@ -5,18 +5,18 @@ class Features extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isSmallScreen = MediaQuery.of(context).size.width < 800;
+
     return Column(
       children: <Widget>[
         const Text('From Scanning to DMCA Takedown Service',
-            style: TextStyle(
-                fontSize: 42,
-                fontWeight: FontWeight.bold)),
+            style: TextStyle(fontSize: 42, fontWeight: FontWeight.bold)),
         GridView.count(
           shrinkWrap: true,
-          crossAxisCount: 2,
+          crossAxisCount: isSmallScreen ? 1 : 2,
           mainAxisSpacing: 16.0,
           crossAxisSpacing: 16.0,
-          childAspectRatio: 0.8,
+          childAspectRatio: isSmallScreen ? 2.0 : 1.6,
           children: featureContents
               .map((FeatureContent feature) => FeatureItem(
                     icon: feature.icon,
@@ -45,7 +45,7 @@ class FeatureItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: Colors.grey[200],
         borderRadius: BorderRadius.circular(8),
@@ -53,8 +53,8 @@ class FeatureItem extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          SizedBox(
-            height: 500,
+          Flexible(
+            flex: 6,
             child: Container(
               width: double.infinity,
               decoration: BoxDecoration(
@@ -63,8 +63,8 @@ class FeatureItem extends StatelessWidget {
               ),
             ),
           ),
-          Expanded(
-            flex: 3,
+          Flexible(
+            flex: 4,
             child: FeatureText(
               icon: icon,
               title: title,

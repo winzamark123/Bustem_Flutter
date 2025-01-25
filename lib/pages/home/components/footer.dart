@@ -31,30 +31,72 @@ class FooterNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Expanded(child: BrandLogo()),
-        Expanded(
-          child: FooterSection(
-            title: 'PRODUCT',
-            items: <String>['Features'],
-          ),
-        ),
-        Expanded(
-          child: FooterSection(
-            title: 'COMPANY',
-            items: <String>['Blog', 'Privacy Policy', 'Terms & Conditions'],
-          ),
-        ),
-        Expanded(
-          child: FooterSection(
-            title: 'HELP',
-            items: <String>['Contact Us', 'FAQ\'s'],
-          ),
-        ),
-      ],
-    );
+    final width = MediaQuery.of(context).size.width;
+    final isSmallScreen = width < 800;
+
+    return isSmallScreen
+        ? const Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              BrandLogo(),
+              SizedBox(height: 32),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Expanded(
+                    child: FooterSection(
+                      title: 'PRODUCT',
+                      items: <String>['Features'],
+                    ),
+                  ),
+                  Expanded(
+                    child: FooterSection(
+                      title: 'COMPANY',
+                      items: <String>[
+                        'Blog',
+                        'Privacy Policy',
+                        'Terms & Conditions'
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: FooterSection(
+                      title: 'HELP',
+                      items: <String>['Contact Us', 'FAQ\'s'],
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          )
+        : const Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Expanded(child: BrandLogo()),
+              Expanded(
+                child: FooterSection(
+                  title: 'PRODUCT',
+                  items: <String>['Features'],
+                ),
+              ),
+              Expanded(
+                child: FooterSection(
+                  title: 'COMPANY',
+                  items: <String>[
+                    'Blog',
+                    'Privacy Policy',
+                    'Terms & Conditions'
+                  ],
+                ),
+              ),
+              Expanded(
+                child: FooterSection(
+                  title: 'HELP',
+                  items: <String>['Contact Us', 'FAQ\'s'],
+                ),
+              ),
+            ],
+          );
   }
 }
 

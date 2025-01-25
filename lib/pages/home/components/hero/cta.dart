@@ -6,20 +6,34 @@ class Cta extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
+    final double width = MediaQuery.of(context).size.width;
+    final bool isSmallScreen = width < 600;
+
+    return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            flex: 75,
-            child: CtaTextbox(),
-          ),
-          Expanded(
-            flex: 25,
-            child: CtaButton(),
-          ),
-        ],
-      ),
+      child: isSmallScreen
+          ? Column(
+              children: <Widget>[
+                const CtaTextbox(),
+                const SizedBox(height: 16),
+                SizedBox(
+                  width: width * 0.8,
+                  child: const CtaButton(),
+                ),
+              ],
+            )
+          : const Row(
+              children: <Widget>[
+                Expanded(
+                  flex: 75,
+                  child: CtaTextbox(),
+                ),
+                Expanded(
+                  flex: 25,
+                  child: CtaButton(),
+                ),
+              ],
+            ),
     );
   }
 }
