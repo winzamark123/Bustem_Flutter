@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'components/carousel/carousel.dart';
+import 'components/faq/faq.dart';
 import 'components/features/features.dart';
 import 'components/hero/cta.dart';
 import 'components/hero/hero_features.dart';
@@ -41,6 +42,13 @@ class HomePage extends StatelessWidget {
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 1000),
               child: const Features(),
+            ),
+          ),
+          const SizedBox(height: 48),
+          Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 1000),
+              child: const Faq(),
             ),
           ),
         ],
