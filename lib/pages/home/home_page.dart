@@ -52,14 +52,20 @@ class HomePage extends StatelessWidget {
           Center(
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 1000),
-              child: Features(key: sectionKeys['features']),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                child: Features(key: sectionKeys['features']),
+              ),
             ),
           ),
           const SizedBox(height: 48),
           Center(
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 1000),
-              child: Faq(key: sectionKeys['faqs']),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                child: Faq(key: sectionKeys['faqs']),
+              ),
             ),
           ),
           const SizedBox(height: 48),

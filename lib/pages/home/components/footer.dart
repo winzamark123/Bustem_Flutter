@@ -1,3 +1,4 @@
+import 'package:bustem_flutter/utils/responsive.dart';
 import 'package:flutter/material.dart';
 
 class Footer extends StatelessWidget {
@@ -31,30 +32,69 @@ class FooterNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Expanded(child: BrandLogo()),
-        Expanded(
-          child: FooterSection(
-            title: 'PRODUCT',
-            items: <String>['Features'],
-          ),
-        ),
-        Expanded(
-          child: FooterSection(
-            title: 'COMPANY',
-            items: <String>['Blog', 'Privacy Policy', 'Terms & Conditions'],
-          ),
-        ),
-        Expanded(
-          child: FooterSection(
-            title: 'HELP',
-            items: <String>['Contact Us', 'FAQ\'s'],
-          ),
-        ),
-      ],
-    );
+    return Responsive.isSmallScreen(context)
+        ? const Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              BrandLogo(),
+              SizedBox(height: 32),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Expanded(
+                    child: FooterSection(
+                      title: 'PRODUCT',
+                      items: <String>['Features'],
+                    ),
+                  ),
+                  Expanded(
+                    child: FooterSection(
+                      title: 'COMPANY',
+                      items: <String>[
+                        'Blog',
+                        'Privacy Policy',
+                        'Terms & Conditions'
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: FooterSection(
+                      title: 'HELP',
+                      items: <String>['Contact Us', 'FAQ\'s'],
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          )
+        : const Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Expanded(child: BrandLogo()),
+              Expanded(
+                child: FooterSection(
+                  title: 'PRODUCT',
+                  items: <String>['Features'],
+                ),
+              ),
+              Expanded(
+                child: FooterSection(
+                  title: 'COMPANY',
+                  items: <String>[
+                    'Blog',
+                    'Privacy Policy',
+                    'Terms & Conditions'
+                  ],
+                ),
+              ),
+              Expanded(
+                child: FooterSection(
+                  title: 'HELP',
+                  items: <String>['Contact Us', 'FAQ\'s'],
+                ),
+              ),
+            ],
+          );
   }
 }
 

@@ -1,3 +1,4 @@
+import 'package:bustem_flutter/utils/responsive.dart';
 import 'package:flutter/material.dart';
 
 class Features extends StatelessWidget {
@@ -5,18 +6,18 @@ class Features extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isSmallScreen = Responsive.isSmallScreen(context);
+
     return Column(
       children: <Widget>[
         const Text('From Scanning to DMCA Takedown Service',
-            style: TextStyle(
-                fontSize: 42,
-                fontWeight: FontWeight.bold)),
+            style: TextStyle(fontSize: 42, fontWeight: FontWeight.bold)),
         GridView.count(
           shrinkWrap: true,
-          crossAxisCount: 2,
+          crossAxisCount: isSmallScreen ? 1 : 2,
           mainAxisSpacing: 16.0,
           crossAxisSpacing: 16.0,
-          childAspectRatio: 0.8,
+          childAspectRatio: isSmallScreen ? 2.0 : 1.6,
           children: featureContents
               .map((FeatureContent feature) => FeatureItem(
                     icon: feature.icon,
@@ -45,7 +46,7 @@ class FeatureItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: Colors.grey[200],
         borderRadius: BorderRadius.circular(8),
@@ -53,8 +54,8 @@ class FeatureItem extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          SizedBox(
-            height: 500,
+          Flexible(
+            flex: 6,
             child: Container(
               width: double.infinity,
               decoration: BoxDecoration(
@@ -63,8 +64,8 @@ class FeatureItem extends StatelessWidget {
               ),
             ),
           ),
-          Expanded(
-            flex: 3,
+          Flexible(
+            flex: 4,
             child: FeatureText(
               icon: icon,
               title: title,
@@ -108,8 +109,8 @@ class FeatureText extends StatelessWidget {
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                  overflow: TextOverflow.fade,
                 ),
               ),
             ],
@@ -122,8 +123,8 @@ class FeatureText extends StatelessWidget {
                 fontSize: 14,
                 color: Colors.grey[600],
               ),
-              overflow: TextOverflow.ellipsis,
-              maxLines: 3,
+              overflow: TextOverflow.fade,
+              maxLines: 2,
             ),
           ),
         ],

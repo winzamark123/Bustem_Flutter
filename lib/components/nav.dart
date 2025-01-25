@@ -1,3 +1,4 @@
+import 'package:bustem_flutter/utils/responsive.dart';
 import 'package:flutter/material.dart';
 
 class NavItem {
@@ -49,6 +50,8 @@ class CustomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isSmallScreen = Responsive.isSmallScreen(context);
+
     return Container(
       height: 80,
       padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -79,21 +82,43 @@ class CustomNavBar extends StatelessWidget {
                 ),
                 const Spacer(),
                 // Navigation items
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: navItems
-                      .asMap()
-                      .entries
-                      .map<Widget>((MapEntry<int, NavItem> entry) => _NavItem(
-                            label: entry.value.label,
-                            isSelected: selectedIndex == entry.key,
-                            onTap: () => scrollToSection(
-                              entry.value.sectionKey,
-                              entry.key,
-                            ),
-                          ))
-                      .toList(),
-                ),
+                if (!isSmallScreen)
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: navItems
+                        .asMap()
+                        .entries
+                        .map<Widget>((MapEntry<int, NavItem> entry) => _NavItem(
+                              label: entry.value.label,
+                              isSelected: selectedIndex == entry.key,
+                              onTap: () => scrollToSection(
+                                entry.value.sectionKey,
+                                entry.key,
+                              ),
+                            ))
+                        .toList(),
+                  )
+                else
+                  PopupMenuButton<int>(
+                    icon: const Icon(Icons.menu),
+                    onSelected: (int index) {
+                      scrollToSection(
+                        navItems[index].sectionKey,
+                        index,
+                      );
+                    },
+                    itemBuilder: (BuildContext context) {
+                      return navItems
+                          .asMap()
+                          .entries
+                          .map((MapEntry<int, NavItem> entry) {
+                        return PopupMenuItem<int>(
+                          value: entry.key,
+                          child: Text(entry.value.label),
+                        );
+                      }).toList();
+                    },
+                  ),
               ],
             ),
           ),
