@@ -12,7 +12,7 @@ class Footer extends StatelessWidget {
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 1000),
           child: const Column(
-            children: [
+            children: <Widget>[
               FooterNavigation(),
               SizedBox(height: 48),
               Divider(),

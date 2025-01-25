@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../pages/home/home_page.dart';
-import '../pages/home/components/footer.dart';
+
 class MainLayout extends StatefulWidget {
   const MainLayout({super.key});
 
