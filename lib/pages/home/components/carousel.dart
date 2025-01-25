@@ -15,7 +15,7 @@ class _CarouselState extends State<Carousel> {
   void initState() {
     super.initState();
     // Auto scroll every 3 seconds
-    Future.delayed(const Duration(seconds: 1), () {
+    Future<void>.delayed(const Duration(seconds: 1), () {
       autoScroll();
     });
   }
@@ -23,7 +23,7 @@ class _CarouselState extends State<Carousel> {
   void autoScroll() {
     if (!mounted) return;
 
-    final currentOffset = _pageController.offset;
+    final double currentOffset = _pageController.offset;
     _pageController
         .animateTo(
       currentOffset + 1.0, // Scroll by 1 pixel at a time
@@ -48,7 +48,7 @@ class _CarouselState extends State<Carousel> {
       child: ListView.builder(
         controller: _pageController,
         scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
+        itemBuilder: (BuildContext context, int index) {
           return SizedBox(
             width: 350, // Fixed column width
             child: index.isEven
@@ -66,7 +66,7 @@ class _CarouselState extends State<Carousel> {
 
   Widget _buildSplitRowLayout(int index) {
     return Column(
-      children: [
+      children: <Widget>[
         SmallCarouselItem(index: index),
         SmallCarouselItem(index: index + 1),
       ],
